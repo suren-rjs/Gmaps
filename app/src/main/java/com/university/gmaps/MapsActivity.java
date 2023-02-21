@@ -25,11 +25,11 @@ import com.google.android.gms.location.Priority;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
 import com.google.android.gms.maps.StreetViewPanorama;
-import com.google.android.gms.maps.StreetViewPanoramaView;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.SupportStreetViewPanoramaFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.StreetViewPanoramaLocation;
 import com.university.gmaps.helper.GmapsLocation;
 
 import java.io.IOException;
@@ -37,10 +37,9 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, StreetViewPanorama.OnStreetViewPanoramaChangeListener {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, OnStreetViewPanoramaReadyCallback {
     private final GmapsLocation gmapsLocation = GmapsLocation.getInstance();
-    private StreetViewPanoramaView streetView;
-    private StreetViewPanorama streetViewPanorama;
+    private SupportStreetViewPanoramaFragment streetViewPanoramaFragment;
     private boolean removeMapView = false;
 
 
@@ -54,6 +53,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.locationMap);
         mapFragment.getMapAsync(this);
+
+        // Get a reference to the SupportStreetViewPanoramaFragment
+        streetViewPanoramaFragment = (SupportStreetViewPanoramaFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.street_view);
+
+        // Call getStreetViewPanoramaAsync to get an instance of the Street View Panorama object
+        streetViewPanoramaFragment.getStreetViewPanoramaAsync(this);
 
         // Initialize the FusedLocationProviderClient
         FusedLocationProviderClient mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -107,30 +113,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mFusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
         }
 
-        streetView = findViewById(R.id.street_view);
-        streetView.onCreate(savedInstanceState);
-        streetView.getStreetViewPanoramaAsync(streetViewPanorama -> {
-            // Use the streetViewPanorama object here
-            this.streetViewPanorama = streetViewPanorama;
-            this.streetViewPanorama.setOnStreetViewPanoramaChangeListener(MapsActivity.this);
-            this.streetViewPanorama.setPosition(gmapsLocation.latLng);
-            this.streetViewPanorama.setPanningGesturesEnabled(true);
-            this.streetViewPanorama.setUserNavigationEnabled(true);
-            this.streetViewPanorama.setZoomGesturesEnabled(true);
-            this.streetViewPanorama.setStreetNamesEnabled(true);
-        });
-//        streetView.setVisibility(View.GONE);
-
         Button streetViewButton = findViewById(R.id.street_view_btn);
 
         streetViewButton.setOnClickListener(v -> {
             removeMapView = !removeMapView;
             if (removeMapView) {
                 mapFragment.getView().setVisibility(View.GONE);
-                streetView.setVisibility(View.VISIBLE);
+                streetViewPanoramaFragment.getView().setVisibility(View.VISIBLE);
                 streetViewButton.setText("Show Map View");
             } else {
-                streetView.setVisibility(View.GONE);
+                streetViewPanoramaFragment.getView().setVisibility(View.GONE);
                 mapFragment.getView().setVisibility(View.VISIBLE);
                 streetViewButton.setText("Show Street View");
             }
@@ -143,11 +135,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
-    public void onStreetViewPanoramaChange(@NonNull StreetViewPanoramaLocation streetViewPanoramaLocation) {
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
     }
 
     @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-        super.onPointerCaptureChanged(hasCapture);
+    public void onStreetViewPanoramaReady(@NonNull StreetViewPanorama streetViewPanorama) {
+        streetViewPanorama.setPosition(new LatLng(37.869260, -122.254811));
+        streetViewPanorama.setPanningGesturesEnabled(true);
+        streetViewPanorama.setUserNavigationEnabled(true);
+        streetViewPanorama.setZoomGesturesEnabled(true);
     }
 }

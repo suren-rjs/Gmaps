@@ -8,7 +8,7 @@
     tools:context=".MapsActivity">
 
 
-    <com.google.android.gms.maps.StreetViewPanoramaView
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/street_view"
         android:name="com.google.android.gms.maps.SupportStreetViewPanoramaFragment"
         android:layout_width="394dp"
@@ -89,23 +89,25 @@
         android:id="@+id/nearbyBtn"
         android:layout_width="218dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
         android:text="@string/nearby_places_btn"
-        app:layout_constraintBottom_toTopOf="@+id/street_view_btn"
+        app:layout_constraintBottom_toBottomOf="@+id/street_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.220"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/street_view_btn"
         android:layout_width="214dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
         android:text="@string/show_street_view"
-        app:layout_constraintBottom_toTopOf="@+id/street_view"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.270"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
