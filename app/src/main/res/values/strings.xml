@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">GMaps</string>
+    <string name="title_activity_maps">Location Tracker</string>
+    <string name="where_is_she">Where is she?</string>
+    <string name="where_am_i">Where am i?</string>
+    <string name="where_is_he">Where is he?</string>
+    <string name="location">Location Tracker</string>
+    <string name="sticky_view"></string>
+    <string name="you_are_here">You are here</string>
+    <string name="address">Address</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="nearby_places_btn">Show nearby places</string>
+    <string name="show_street_view">Show street view</string>
+</resources>

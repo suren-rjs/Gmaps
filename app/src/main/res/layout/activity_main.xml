@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <Button
+        android:id="@+id/i_am"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="@string/where_am_i"
+        app:layout_constraintBottom_toTopOf="@+id/she"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.531"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/she"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:text="@string/where_is_he"
+        app:layout_constraintBottom_toTopOf="@+id/mainMap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.824"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/he"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="@string/where_is_she"
+        app:layout_constraintBottom_toTopOf="@+id/she"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/i_am"
+        app:layout_constraintVertical_bias="0.347"
+        tools:ignore="MissingConstraints" />
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/mainMap"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="395dp"
+        android:layout_height="517dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:context=".MapsActivity" />
+
+    <TextView
+        android:id="@+id/location_tracker"
+        android:layout_width="394dp"
+        android:layout_height="101dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:lineSpacingExtra="10sp"
+        android:text="@string/location"
+        android:textAlignment="center"
+        android:textColor="#FF5F5F"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/mainMap"
+        app:layout_constraintEnd_toEndOf="@+id/mainMap"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/mainMap"
+        app:layout_constraintTop_toTopOf="@+id/mainMap"
+        app:layout_constraintVertical_bias="0.54"
+        tools:ignore="TextViewEdits" />
+
+    <TextView
+        android:id="@+id/empty_layer"
+        android:layout_width="395dp"
+        android:layout_height="512dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:lineSpacingExtra="10sp"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="#FF5F5F"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/mainMap"
+        app:layout_constraintEnd_toEndOf="@+id/mainMap"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/mainMap"
+        app:layout_constraintTop_toTopOf="@+id/mainMap"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="TextViewEdits" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
